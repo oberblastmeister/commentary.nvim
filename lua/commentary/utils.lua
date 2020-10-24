@@ -81,15 +81,9 @@ function M.uncomment(line, commentstring)
 
   local pattern
   if cmnt2 then
-    local pattern1 = cmnt1 .. "%s?"
-    local pattern2 = "%s?" .. cmnt2
-    local full_pattern = pattern1 .. "(.*)" .. pattern2
-    print('full pattern:')
-    string.debug(full_pattern)
+    local full_pattern = cmnt1 .. "(.*)" .. cmnt2
     line = line:gsub(full_pattern, "%1")
-    print('line:')
-    string.debug(line)
-    return line
+    line = string.trim1(line, true, true)
   else
     pattern = string.escape_lua_pattern(cmnt1) .. "%s?"
     line = line:gsub(pattern, "", 1)

@@ -106,6 +106,16 @@ describe("#uncomment", function()
 
   it("python", function()
     assert.are.equals(utils.uncomment("# this is commented", "#%s"), "this is commented")
+    assert.are.equals(utils.uncomment("#this is commented", "#%s"), "this is commented")
+    assert.are.equals(utils.uncomment("#this is commented#", "#%s"), "this is commented#")
+    assert.are.equals(utils.uncomment("## this is commented", "#%s"), "# this is commented")
+  end)
+
+  it("rust", function()
+    assert.are.equals(utils.uncomment("// this is commented", "//%s"), "this is commented")
+    assert.are.equals(utils.uncomment("//this is commented", "//%s"), "this is commented")
+    assert.are.equals(utils.uncomment("//this is commented//", "//%s"), "this is commented//")
+    assert.are.equals(utils.uncomment("//// this is commented", "//%s"), "// this is commented")
   end)
 
   it("multiple comments", function()
